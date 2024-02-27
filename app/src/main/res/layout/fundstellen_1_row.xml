@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools">
+
+
+    <TextView
+        android:id="@+id/fundstellen_1_Buch"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="Buch"
+        android:textColor="@color/design_default_color_primary_dark"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toStartOf="@+id/fundstellen_1_BildBuch"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/fundstellen_1_divider2" />
+
+    <TextView
+        android:id="@+id/fundstellen_1_Nr"
+        android:layout_width="40dp"
+        android:layout_height="wrap_content"
+        android:text="Nr"
+        android:textSize="14sp"
+        app:layout_constraintStart_toStartOf="@+id/fundstellen_1_divider"
+        app:layout_constraintTop_toBottomOf="@+id/fundstellen_1_divider" />
+
+    <TextView
+        android:id="@+id/fundstellen_1_Komponist"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Komponist"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toStartOf="@+id/fundstellen_1_Besetzung"
+        app:layout_constraintStart_toStartOf="@+id/fundstellen_1_Titel"
+        app:layout_constraintTop_toBottomOf="@+id/fundstellen_1_Titel" />
+
+    <TextView
+        android:id="@+id/fundstellen_1_Titel"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:background="@color/colorTextBackground"
+        android:text="Titel"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/fundstellen_1_Nr"
+        app:layout_constraintTop_toTopOf="@+id/fundstellen_1_Nr" />
+
+    <View
+        android:id="@+id/fundstellen_1_divider2"
+        android:layout_width="0dp"
+        android:layout_height="2dp"
+        android:layout_marginTop="16dp"
+        android:background="@color/colorPrimaryDark"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/fundstellen_1_Besetzung"
+        android:layout_width="70dp"
+        android:layout_height="20dp"
+        android:text="Besetzung"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toStartOf="@+id/fundstellen_1_Vorzeichen"
+        app:layout_constraintTop_toTopOf="@+id/fundstellen_1_Komponist" />
+
+    <TextView
+        android:id="@+id/fundstellen_1_Vorzeichen"
+        android:layout_width="30dp"
+        android:layout_height="20dp"
+        android:layout_marginEnd="8dp"
+        android:text="Vorzeichen"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/fundstellen_1_Komponist" />
+
+    <ImageView
+        android:id="@+id/fundstellen_1_BildBuch"
+        android:layout_width="54dp"
+        android:layout_height="61dp"
+        android:layout_marginEnd="8dp"
+        android:scaleType="centerCrop"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/fundstellen_1_Buch" />
+
+    <View
+        android:id="@+id/fundstellen_1_divider"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="9dp"
+        android:background="@android:color/darker_gray"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/fundstellen_1_BildBuch" />
+
+
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/fundstellen_1_rowheadlinegroup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:constraint_referenced_ids="fundstellen_1_Buch,fundstellen_1_BildBuch,fundstellen_1_divider2"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:visibility="visible" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

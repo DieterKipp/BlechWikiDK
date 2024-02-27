@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/actionEGSort_toggle"
+        android:icon="@drawable/ic_list_numbered_green"
+        android:orderInCategory="100"
+        android:title="EGtoggle"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/actionEGtableupdate"
+        android:icon="@drawable/ic_update_green"
+        android:orderInCategory="100"
+        android:title="update Tabelle vom Server"
+        app:showAsAction="never" />
+
+</menu>

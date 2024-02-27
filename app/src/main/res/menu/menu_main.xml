@@ -1,0 +1,41 @@
+<menu
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".EGLieder">
+        <group android:checkableBehavior="single">
+
+                <item
+            android:id="@+id/actionEG"
+            android:icon="@drawable/ic_eg"
+            android:title="@string/eglieder" />
+
+
+                <item
+            android:id="@+id/actionEGTextsearch"
+            android:icon="@drawable/ic_text_tt"
+            android:title="@string/egliedertextsearch" />
+
+
+                <item
+            android:id="@+id/actionTitel"
+            android:icon="@drawable/ic_titelliste"
+            android:title="@string/titel" />
+
+
+                <item
+            android:id="@+id/actionKomponisten"
+            android:icon="@drawable/ic_person"
+            android:title="@string/komponisten" />
+
+                <item
+            android:id="@+id/actionBücher"
+            android:icon="@drawable/ic_book"
+            android:title="@string/b_cher"/>
+
+
+                <item
+            android:id="@+id/actionSettings"
+            android:icon="@drawable/ic_app_settings"
+            android:title="@string/settings" />
+        </group>
+</menu>

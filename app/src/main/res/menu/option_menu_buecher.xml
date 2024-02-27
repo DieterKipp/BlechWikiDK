@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/actionBüchertableupdate"
+        android:icon="@drawable/ic_update_green"
+        android:orderInCategory="100"
+        android:title="update Tabelle vom Server"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/actionBesitzFilter"
+        android:icon="@drawable/ic_filter_gray"
+        android:orderInCategory="100"
+        android:title="meine Bücher filtern"
+        app:showAsAction="ifRoom" />
+</menu>

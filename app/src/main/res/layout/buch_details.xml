@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/BuchDetailsImageView"
+        android:layout_width="150dp"
+        android:layout_height="200dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:srcCompat="@tools:sample/avatars[11]" />
+
+    <TextView
+        android:id="@+id/BuchDetailsTextViewKurz"
+        android:layout_width="wrap_content"
+        android:layout_height="24dp"
+        android:layout_marginStart="8dp"
+        android:background="@drawable/simple_border"
+        android:text="kurz"
+        app:layout_constraintStart_toEndOf="@+id/BuchDetailsImageView"
+        app:layout_constraintTop_toTopOf="@+id/BuchDetailsImageView" />
+
+    <TextView
+        android:id="@+id/BuchDetailsTextViewBuch"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:background="@drawable/headline_border"
+        android:padding="8dp"
+        android:text="Buch"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/BuchDetailsImageView" />
+
+    <TextView
+        android:id="@+id/BuchDetailsTextViewUntertitel"
+        android:layout_width="0dp"
+        android:layout_height="24dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:background="@drawable/simple_border"
+        android:text="Untertitel"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/BuchDetailsTextViewBuch" />
+
+    <TextView
+        android:id="@+id/BuchDetailsTextViewErscheinjahr"
+        android:layout_width="50dp"
+        android:layout_height="24dp"
+        android:layout_marginEnd="8dp"
+        android:background="@drawable/simple_border"
+        android:text="Erscheinjahr"
+        android:textAlignment="textEnd"
+        app:layout_constraintEnd_toStartOf="@+id/BuchDetailsTextViewRelevanz"
+        app:layout_constraintTop_toTopOf="@+id/BuchDetailsTextViewRelevanz" />
+
+    <TextView
+        android:id="@+id/BuchDetailsTextViewRelevanz"
+        android:layout_width="50dp"
+        android:layout_height="24dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:background="@drawable/simple_border"
+        android:text="Relevanz"
+        android:textAlignment="textEnd"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/BuchDetailsTextViewVerlagsnummer" />
+
+    <TextView
+        android:id="@+id/BuchDetailsTextViewHerausgeber"
+        android:layout_width="0dp"
+        android:layout_height="24dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:background="@drawable/simple_border"
+        android:text="Herausgeber"
+        app:layout_constraintEnd_toStartOf="@+id/BuchDetailsTextViewHerausgeberVorname"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="@+id/BuchDetailsTextViewUntertitel"
+        app:layout_constraintTop_toBottomOf="@+id/BuchDetailsTextViewUntertitel" />
+
+    <TextView
+        android:id="@+id/BuchDetailsTextViewHerausgeberVorname"
+        android:layout_width="130dp"
+        android:layout_height="24dp"
+        android:layout_marginEnd="8dp"
+        android:background="@drawable/simple_border"
+        android:text="HerausgeberVorname"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/BuchDetailsTextViewHerausgeber"
+        app:layout_constraintTop_toTopOf="@+id/BuchDetailsTextViewHerausgeber" />
+
+    <TextView
+        android:id="@+id/BuchDetailsTextViewVerlag"
+        android:layout_width="0dp"
+        android:layout_height="24dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/simple_border"
+        android:text="Verlag"
+        app:layout_constraintEnd_toStartOf="@+id/BuchDetailsTextViewVerlagsnummer"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/BuchDetailsTextViewHerausgeber" />
+
+    <TextView
+        android:id="@+id/BuchDetailsTextViewVerlagsnummer"
+        android:layout_width="50dp"
+        android:layout_height="24dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:background="@drawable/simple_border"
+        android:text="Verlagsnummer"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/BuchDetailsTextViewVerlag"
+        app:layout_constraintTop_toTopOf="@+id/BuchDetailsTextViewVerlag" />
+
+    <TextView
+        android:id="@+id/BuchDetailsTextViewZulieferung"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:background="@drawable/simple_border"
+        android:text="Zulieferung"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/BuchDetailsTextViewErscheinjahr" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

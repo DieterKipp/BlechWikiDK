@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/actionEG_Liedtext"
+        android:icon="@drawable/ic_text_tt"
+        android:orderInCategory="100"
+        android:title="Liedtext"
+        app:showAsAction="ifRoom" />
+</menu>

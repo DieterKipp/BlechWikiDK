@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/LiteraBuecherBuch"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:background="@color/colorTextBackground"
+        android:text="Buch"
+        android:textColor="@color/design_default_color_primary_dark"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toStartOf="@+id/LiteraBuecherBild"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/LiteraBuecherBuchUntertitel"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Untertitel"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="@+id/LiteraBuecherBuch"
+        app:layout_constraintStart_toStartOf="@+id/LiteraBuecherBuch"
+        app:layout_constraintTop_toBottomOf="@+id/LiteraBuecherBuch" />
+
+    <ImageView
+        android:id="@+id/LiteraBuecherBild"
+        android:layout_width="44dp"
+        android:layout_height="66dp"
+        android:background="@color/colorTextBackground"
+        android:scaleType="centerCrop"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <View
+        android:layout_width="409dp"
+        android:layout_height="2dp"
+        android:background="@color/colorTextBackground"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <CheckBox
+        android:id="@+id/LiteraBuecherBuchCheckBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="10sp"
+        android:text="meine Bücher"
+        app:layout_constraintStart_toStartOf="@+id/LiteraBuecherBuchUntertitel"
+        app:layout_constraintTop_toBottomOf="@+id/LiteraBuecherBuchUntertitel" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
