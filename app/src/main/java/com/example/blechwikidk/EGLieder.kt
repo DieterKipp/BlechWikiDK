@@ -20,6 +20,7 @@ import com.example.blechwikidk.util.DBLib
 import com.example.blechwikidk.util.Fundstellen
 import com.example.blechwikidk.util.MenuLib
 import com.example.blechwikidk.util.SessionLib
+import com.example.blechwikidk.util.TableUpdate
 import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.MainScope
@@ -226,10 +227,10 @@ class EGLieder : AppCompatActivity() {
     private fun setAdapter(){
 
         if(sort=="abc") {
-            binding.EGLiederRecyclerView.adapter = EGLiederAdapter(dataListfiltered.sortedBy { it.lied.lowercase(Locale.ROOT) },sort)
+            binding.EGLiederRecyclerView.adapter = EGLiederAdapterABC(dataListfiltered.sortedBy { it.lied.lowercase(Locale.ROOT) },sort)
             binding.EGLiederSearchEditText.inputType = (InputType.TYPE_CLASS_TEXT)
         }else{
-            binding.EGLiederRecyclerView.adapter = EGLiederAdapter(dataListfiltered.sortedBy { it.nr},sort)
+            binding.EGLiederRecyclerView.adapter = EGLiederAdapterNr(dataListfiltered.sortedBy { it.nr},sort)
             binding.EGLiederSearchEditText.inputType = (InputType.TYPE_CLASS_NUMBER)
         }
     }

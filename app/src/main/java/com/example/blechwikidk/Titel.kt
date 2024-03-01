@@ -17,6 +17,7 @@ import com.example.blechwikidk.util.AbstrHelper
 import com.example.blechwikidk.util.DBLib
 import com.example.blechwikidk.util.MenuLib
 import com.example.blechwikidk.util.SessionLib
+import com.example.blechwikidk.util.TableUpdate
 import java.util.Locale
 
 class Titel : AppCompatActivity() {

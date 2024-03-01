@@ -1,4 +1,4 @@
-package com.example.blechwikidk
+package com.example.blechwikidk.util
 
 import android.util.Log
 import com.example.blechwikidk.database.BuecherFromDB
@@ -9,8 +9,6 @@ import com.example.blechwikidk.model.BuchFromURL
 import com.example.blechwikidk.model.EGLiedMod
 import com.example.blechwikidk.model.KomponistFromURL
 import com.example.blechwikidk.model.TitelFromURL
-import com.example.blechwikidk.util.DBLib
-import com.example.blechwikidk.util.SessionLib
 import com.google.gson.Gson
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.MainScope
