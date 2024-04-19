@@ -16,8 +16,8 @@ android {
         applicationId "com.example.blechwikidk"
         minSdkVersion 24
         targetSdkVersion 34
-        versionCode 35
-        versionName "27.02.24"
+        versionCode 36 
+        versionName "25.03.24"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
     buildTypes {

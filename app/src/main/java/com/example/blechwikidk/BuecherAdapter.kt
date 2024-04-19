@@ -51,6 +51,7 @@ class BuecherAdapter(private val buecherList: List<BuchRCMod>) :
 //            d("Dieter", "vorhandenDB: $vorhandenDB")
 //            d("Dieter", "checkboxstate: $checkstate")
             if (vorhandenDB !== checkstate) {
+                buecherList[vholder.adapterPosition].vorhanden = checkstate
                 DBLib.DatabaseInstance.buecherDAO()
                     .updatebuchvorhanden(buecherList[vholder.adapterPosition].buchId, checkstate)
                 d("Dieter", "checkboxstategeändert: $checkstate")

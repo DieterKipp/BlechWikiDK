@@ -96,13 +96,14 @@ class Buecher : AppCompatActivity() {
         when (item.itemId) {
 
             R.id.actionBüchertableupdate -> {
-                binding.buecherProgressBar.visibility=View.VISIBLE
-                Toast.makeText(this, "!ich lade jetzt die aktuelle Liste vom Server!", Toast.LENGTH_LONG).show()
-
-                SessionLib.setPref("BuchChangeCounter", "0")
-                TableUpdate.checkforTableupdateBuecher()
-                binding.buecherSearchEditText.setText("")
-                readFromDB()
+//                binding.buecherProgressBar.visibility=View.VISIBLE
+//                Toast.makeText(this, "!ich lade jetzt die aktuelle Liste vom Server!", Toast.LENGTH_LONG).show()
+//
+//                SessionLib.setPref("BuchChangeCounter", "0")
+//                TableUpdate.checkforTableupdateBuecher()
+//                binding.buecherSearchEditText.setText("")
+//                readFromDB()
+                SessionLib.dialoganzeigen(this,"dieser Menüzweig ist vorübergehend deaktiviert","ok","deaktiviert")
                 return true
             }
             R.id.actionBesitzFilter -> {
