@@ -135,7 +135,7 @@ class EGLiederTextSearch : AppCompatActivity() {
                 vText = Gson().fromJson(json.await(), String::class.java).toString()
                 vText = URLDecoder.decode(vText, "UTF-8")
 
-                binding.fundstellentextsearchTvPattern.text = Fundstellen.getspannable(vText,searchterms)
+                binding.fundstellentextsearchTvPattern.text = Fundstellen.getspannable(this@EGLiederTextSearch,vText,searchterms)
 
             } catch (e: Exception) {
                 SessionLib.dialoganzeigen(

@@ -1,5 +1,6 @@
 package com.example.blechwikidk.util
 
+import android.content.Context
 import android.graphics.Color
 import android.text.Spannable
 import android.text.SpannableString
@@ -89,7 +90,7 @@ object Fundstellen {
         }
     }
 
-    fun getspannable(egText:String, seasrchtermList:List<String>): SpannableString {
+    fun getspannable(ctx:Context, egText:String, seasrchtermList:List<String>): SpannableString {
 
         var start: Int
         var end: Int
@@ -100,28 +101,33 @@ object Fundstellen {
         val yellow3 = BackgroundColorSpan(Color.GREEN)
 
         for (i in seasrchtermList.indices) {
-            start = egText.indexOf(seasrchtermList[i], 0, true)
-            end = start + seasrchtermList[i].length
-            when (i) {
-                0 -> spannableString.setSpan(
-                    yellow1,
-                    start,
-                    end,
-                    Spannable.SPAN_INCLUSIVE_INCLUSIVE
-                )
-                1 -> spannableString.setSpan(
-                    yellow2,
-                    start,
-                    end,
-                    Spannable.SPAN_INCLUSIVE_INCLUSIVE
-                )
-                2 -> spannableString.setSpan(
-                    yellow3,
-                    start,
-                    end,
-                    Spannable.SPAN_INCLUSIVE_INCLUSIVE
-                )
+            try {
+                start = egText.indexOf(seasrchtermList[i], 0, true)
+                end = start + seasrchtermList[i].length
+                when (i) {
+                    0 -> spannableString.setSpan(
+                        yellow1,
+                        start,
+                        end,
+                        Spannable.SPAN_INCLUSIVE_INCLUSIVE
+                    )
+                    1 -> spannableString.setSpan(
+                        yellow2,
+                        start,
+                        end,
+                        Spannable.SPAN_INCLUSIVE_INCLUSIVE
+                    )
+                    2 -> spannableString.setSpan(
+                        yellow3,
+                        start,
+                        end,
+                        Spannable.SPAN_INCLUSIVE_INCLUSIVE
+                    )
+                }
+            }catch(ex: Exception){
+                SessionLib.dialoganzeigen(ctx, "es gibt ein Problem mit der Schreibweise von - ${seasrchtermList[i]} -","verstanden","Index of ${seasrchtermList[i]} nicht gefunden")
             }
+
         }
         return spannableString
     }
