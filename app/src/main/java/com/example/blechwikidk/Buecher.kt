@@ -7,6 +7,7 @@ import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.view.inputmethod.InputMethodManager
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -16,6 +17,7 @@ import com.example.blechwikidk.util.AbstrHelper
 import com.example.blechwikidk.util.DBLib
 import com.example.blechwikidk.util.MenuLib
 import com.example.blechwikidk.util.SessionLib
+import com.example.blechwikidk.util.TableUpdate
 import java.util.Locale
 
 class Buecher : AppCompatActivity() {
@@ -94,14 +96,14 @@ class Buecher : AppCompatActivity() {
         when (item.itemId) {
 
             R.id.actionBüchertableupdate -> {
-//                binding.buecherProgressBar.visibility=View.VISIBLE
-//                Toast.makeText(this, "!ich lade jetzt die aktuelle Liste vom Server!", Toast.LENGTH_LONG).show()
-//
-//                SessionLib.setPref("BuchChangeCounter", "0")
-//                TableUpdate.checkforTableupdateBuecher()
-//                binding.buecherSearchEditText.setText("")
-//                readFromDB()
-                SessionLib.dialoganzeigen(this,"dieser Menüzweig ist vorübergehend deaktiviert","ok","deaktiviert")
+                binding.buecherProgressBar.visibility=View.VISIBLE
+                Toast.makeText(this, "!ich lade jetzt die aktuelle Liste vom Server!", Toast.LENGTH_LONG).show()
+
+                SessionLib.setPref("BuchChangeCounter", "0")
+                TableUpdate.checkforTableupdateBuecher()
+                binding.buecherSearchEditText.setText("")
+                readFromDB()
+                //SessionLib.dialoganzeigen(this,"dieser Menüzweig ist vorübergehend deaktiviert","ok","deaktiviert")
                 return true
             }
             R.id.actionBesitzFilter -> {

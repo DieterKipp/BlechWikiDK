@@ -21,6 +21,7 @@ import com.example.blechwikidk.model.EGLKAMod
 import com.example.blechwikidk.util.Fundstellen
 import com.example.blechwikidk.util.MenuLib
 import com.example.blechwikidk.util.SessionLib
+import androidx.core.content.edit
 
 class Settings : AppCompatActivity() {
 
@@ -59,8 +60,8 @@ class Settings : AppCompatActivity() {
 
 
         //-----------
-        SessionLib.sharedPref.edit().remove("nurFundstellenMeineBücher").apply()
-        SessionLib.sharedPref.edit().remove("FundstellennurMeineBücher").apply()
+        SessionLib.sharedPref.edit() { remove("nurFundstellenMeineBücher") }
+        SessionLib.sharedPref.edit() { remove("FundstellennurMeineBücher") }
         //-----------
 
         setRCAdapter()
@@ -75,6 +76,7 @@ class Settings : AppCompatActivity() {
     }
 
     private fun setListeners() {
+        
         binding.settingsNavView.setNavigationItemSelectedListener {
             binding.SettingsDrawerLayout.closeDrawers()
 
