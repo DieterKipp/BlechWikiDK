@@ -35,7 +35,7 @@ class EGLiederFundstellen : AppCompatActivity() {
 
         val vIxUr = intent.getStringExtra("IxUr")
         val vIx = intent.getStringExtra("Ix")
-        val uRLString = SessionLib.RestBasisURL + "EG/" + vIxUr
+        val uRLString = SessionLib.BASISURL + "EG/" + vIxUr
 
         fetchData(uRLString)
         setUI()
@@ -51,12 +51,12 @@ class EGLiederFundstellen : AppCompatActivity() {
             //d("Dieter","setonclicklistener")
 
             val intent = Intent(this@EGLiederFundstellen, EGLiederText::class.java)
-            intent.putExtra("vIx", vIx!!.toString())
+            intent.putExtra("vIx", vIx!!)
             startActivity(intent)
         }
         binding.fundstellenBtnInfo.setOnClickListener {
             val intent = Intent(this@EGLiederFundstellen, EGLiederText::class.java)
-            intent.putExtra("vIx", vIx!!.toString())
+            intent.putExtra("vIx", vIx!!)
             startActivity(intent)
         }
     }
@@ -102,7 +102,7 @@ class EGLiederFundstellen : AppCompatActivity() {
 
                 val vIx = intent.getStringExtra("Ix")
                 val intent = Intent(this@EGLiederFundstellen, EGLiederText::class.java)
-                intent.putExtra("vIx", vIx!!.toString())
+                intent.putExtra("vIx", vIx!!)
                 startActivity(intent)
             }
         }

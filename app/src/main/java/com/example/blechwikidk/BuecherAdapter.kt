@@ -73,7 +73,7 @@ class BuecherAdapter(private val buecherList: List<BuchRCMod>) :
             else -> holder.vmeineBuecher.isChecked = false
         }
 
-        val vpath = SessionLib.BasisURLPicBuch + "mini240/" + vbuch.buchkurz + ".jpg"
+        val vpath = SessionLib.BASISURLPICBUCH + "mini240/" + vbuch.buchkurz + ".jpg"
         holder.vBild.load(vpath)
 
     }

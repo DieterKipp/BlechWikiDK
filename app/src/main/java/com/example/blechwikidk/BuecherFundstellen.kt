@@ -40,7 +40,7 @@ class BuecherFundstellen : AppCompatActivity() {
         }
 
         val vBuchId = intent.getStringExtra("BuchId")
-        val uRLString = SessionLib.RestBasisURL + "Buch/" + vBuchId
+        val uRLString = SessionLib.BASISURL + "Buch/" + vBuchId
 
         fetchData(uRLString)
         setUI()

@@ -69,7 +69,7 @@ object TableUpdate {
     fun getRESTDataEG():String {
         Log.d("Dieter", "checkforTableupdatesEG beginn")
 
-        val vURL = "${SessionLib.RestBasisURL}EG"
+        val vURL = "${SessionLib.BASISURL}EG"
         val json =
             URL(vURL).readText(charset("UTF-8"))
 
@@ -109,7 +109,7 @@ object TableUpdate {
             changecounterstring.toInt()
         }
 
-        val vURL = "${SessionLib.RestBasisURL}Version?Tabelle=Titel&counter=$changecounter"
+        val vURL = "${SessionLib.BASISURL}Version?Tabelle=Titel&counter=$changecounter"
         val json =
             URL(vURL).readText(charset("UTF-8"))
 
@@ -160,7 +160,7 @@ object TableUpdate {
             changecounterstring.toInt()
         }
 
-        val vURL = "${SessionLib.RestBasisURL}Version?Tabelle=Komponist&counter=$changecounter"
+        val vURL = "${SessionLib.BASISURL}Version?Tabelle=Komponist&counter=$changecounter"
         val json =
             URL(vURL).readText(charset("UTF-8"))
 
@@ -253,7 +253,7 @@ object TableUpdate {
             changecounterstring.toInt()
         }
 
-        val vURL = "${SessionLib.RestBasisURL}Version?Tabelle=Buch&counter=$changecounter"
+        val vURL = "${SessionLib.BASISURL}Version?Tabelle=Buch&counter=$changecounter"
         val json =
             URL(vURL).readText(charset("UTF-8"))
 

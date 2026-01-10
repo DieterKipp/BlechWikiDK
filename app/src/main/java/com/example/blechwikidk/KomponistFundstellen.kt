@@ -48,7 +48,7 @@ class KomponistFundstellen : AppCompatActivity() {
         komponist = intent.getStringExtra("Komponist")!!
 
         val vid = intent.getStringExtra("id")
-        val uRLString = SessionLib.RestBasisURL + "Komponist/" + vid
+        val uRLString = SessionLib.BASISURL + "Komponist/" + vid
 
         //------------------------------
 

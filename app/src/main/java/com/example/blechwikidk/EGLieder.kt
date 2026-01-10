@@ -1,6 +1,5 @@
 package com.example.blechwikidk
 
-import android.content.Context
 import android.os.Bundle
 import android.text.InputType
 import android.util.Log.d
@@ -21,6 +20,7 @@ import com.example.blechwikidk.util.Fundstellen
 import com.example.blechwikidk.util.MenuLib
 import com.example.blechwikidk.util.SessionLib
 import com.example.blechwikidk.util.TableUpdate
+import com.example.blechwikidk.util.UpdateHelper
 import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.MainScope
@@ -61,7 +61,7 @@ class EGLieder : AppCompatActivity() {
         if(SessionLib.isinitialized=="false"){
             DBLib.getDBInstance(this, "true")
             SessionLib.getOnlineStatus(this)
-            SessionLib.checkforNewVersion(this)
+            UpdateHelper().checkforNewVersion(this)
             val vEGLiedergelesen = SessionLib.getPref("EGLiedergelesen")
             if (vEGLiedergelesen != "true") {
                 Toast.makeText(this, "!ich lade jetzt die aktuelle EG-Lieder Liste vom Server!", Toast.LENGTH_LONG).show()
@@ -127,7 +127,7 @@ class EGLieder : AppCompatActivity() {
 
             binding.EGLiederSearchEditText.setText("")
 
-            val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+            val imm = getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
             imm.hideSoftInputFromWindow(it.windowToken, 0)
         }
     }

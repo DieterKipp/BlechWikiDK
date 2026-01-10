@@ -42,11 +42,11 @@ class BuchDetails: AppCompatActivity()  {
         binding.BuchDetailsTextViewRelevanz.text = dataListFromDB[0].relevanz.toString()
 
 
-        val vpath  = SessionLib.BasisURLPicBuch + "mini240/" + dataListFromDB[0].buchkurz + ".jpg"
+        val vpath  = SessionLib.BASISURLPICBUCH + "mini240/" + dataListFromDB[0].buchkurz + ".jpg"
         binding.BuchDetailsImageView.load(vpath)
 
         binding.BuchDetailsImageView.setOnClickListener {
-            val urlstring = SessionLib.BasisURLPicBuch +  dataListFromDB[0].buchkurz + ".jpg"
+            val urlstring = SessionLib.BASISURLPICBUCH +  dataListFromDB[0].buchkurz + ".jpg"
             val intent = Intent(it.context, WebViewer::class.java)
 
             intent.putExtra("browseURL", urlstring)

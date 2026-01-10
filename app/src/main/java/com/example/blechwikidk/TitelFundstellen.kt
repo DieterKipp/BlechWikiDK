@@ -32,7 +32,7 @@ class TitelFundstellen : AppCompatActivity() {
         }
         //-----------------
         val vIx = intent.getStringExtra("Ix")
-        val uRLString = SessionLib.RestBasisURL + "Titel/" + vIx
+        val uRLString = SessionLib.BASISURL + "Titel/" + vIx
 
         fetchData(uRLString)
         setUI()

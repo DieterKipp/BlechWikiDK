@@ -1,30 +1,34 @@
 package com.example.blechwikidk
 
-import android.Manifest
-import android.content.pm.PackageManager
+import android.annotation.SuppressLint
+import android.app.DownloadManager
+import android.content.ActivityNotFoundException
+import android.content.BroadcastReceiver
+import android.content.Context
+import android.content.Intent
+import android.content.IntentFilter
 import android.os.Build
 import android.os.Bundle
-import android.util.Log.d
+import android.os.Environment.DIRECTORY_DOWNLOADS
+import android.os.Environment.getExternalStoragePublicDirectory
+import android.util.Log
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
-import com.example.blechwikidk.util.*
-import com.google.android.material.snackbar.Snackbar
+import androidx.core.content.FileProvider
 import com.example.blechwikidk.databinding.UpdateBinding
+import com.example.blechwikidk.util.DownloadController
+import com.example.blechwikidk.util.SessionLib
+import java.io.File
 
 
 class Update : AppCompatActivity() {
 
-    private lateinit var binding: UpdateBinding
-
-    companion object {
-        const val PERMISSION_REQUEST_STORAGE = 0
-    }
+    private lateinit var binding:UpdateBinding
 
     private lateinit var downloadController: DownloadController
-    private lateinit var downloadControllerAPI29: DownloadControllerAPI29
 
-
-    private val filename = "${SessionLib.ident}/${SessionLib.ident}.apk"
-    private val apkUrl = "http://pcportal.ddns.net/downloads/apk/$filename"
+    private val filename = "${SessionLib.IDENT}/${SessionLib.IDENT}.apk"
+    private val apkUrl = "https://teddymuetze.ddns.net/downloads/apk/$filename"
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
@@ -35,93 +39,90 @@ class Update : AppCompatActivity() {
 
         //---------------------------------------------------
 
+        val versionNamefromServer = intent.getStringExtra("versionNamefromServer")
+        val versionCodefromServer = intent.getIntExtra("versionCodefromServer",0)
 
         val newVersionText =
-            if (SessionLib.updateVersionName == SessionLib.currentVersionName) {
-                //es gibt keine neue Versionsnummer
-                "Neuinstallation mit ${SessionLib.currentVersionName} möglich"
+            if (versionCodefromServer == 99) {
+                //Aufruf von "update" aus dem menue
+                "Neuinstallation möglich"
             } else {
-                "update auf Version: ${SessionLib.updateVersionName}"
+                "update auf Version: $versionCodefromServer vom $versionNamefromServer"
             }
         binding.TextviewNewVersion.text = newVersionText
-        val version = "bisher: ${SessionLib.currentVersionName}"
+        val version = "bisherige Version: ${SessionLib.VERSIONCODE} vom ${SessionLib.VERSIONNAME}"
         binding.TextviewOldVersion.text = version
         //---------------------
 
+        downloadController = DownloadController(this, apkUrl,filename)
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-            downloadControllerAPI29 = DownloadControllerAPI29(this, apkUrl,filename)
-        }else{
-            downloadController = DownloadController(this, apkUrl,filename)
-        }
+        setListeners()
+        setBroadcastReceiverForDownloadready()
+        binding.ButtonInstallation.visibility = View.GONE
+    }
 
+    private fun setListeners() {
         binding.ButtonStartDownload.setOnClickListener {
-
-            // check storage permission granted if yes then start downloading file
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-                downloadControllerAPI29.enqueueDownload()
-            }else{
-
-                checkStoragePermission()
-            }
-        }
-    }
-
-    private fun checkStoragePermission() {
-        // Check if the storage permission has been granted
-        if (checkSelfPermissionCompat(Manifest.permission.WRITE_EXTERNAL_STORAGE) ==
-            PackageManager.PERMISSION_GRANTED
-        ) {
-            // start downloading
             downloadController.enqueueDownload()
-        } else {
-            // Permission is missing and must be requested.
-            requestStoragePermission()
         }
+
+        binding.ButtonInstallation.setOnClickListener(){
+            installation()
+        }
+
     }
 
+    @SuppressLint("UnspecifiedRegisterReceiverFlag")
+    private fun setBroadcastReceiverForDownloadready() {
 
+        // set BroadcastReceiver to install app when .apk is downloaded
+        //        // dafür muss im Manifest 'REQUEST_INSTALL_PACKAGES' eingetragen sein
+        //        // und der fileprovider
+        //        // und die XML 'file_provider_paths' muss angelegt sein
 
-    private fun requestStoragePermission() {
-
-        if (shouldShowRequestPermissionRationaleCompat(Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
-            binding.updateLayout.showSnackbar(
-                R.string.storage_access_required,
-                Snackbar.LENGTH_INDEFINITE, R.string.ok
+        val br = object : BroadcastReceiver() {
+            override fun onReceive(
+                context: Context,
+                intent: Intent
             ) {
-                requestPermissionsCompat(
-                    arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE),
-                    PERMISSION_REQUEST_STORAGE
-                )
-            }
+//                SessionLib.dialoganzeigen(context,"du kannst jetzt die Installation starten !","verstanden","download fertig")
+//                binding.ButtonInstallation.visibility = View.VISIBLE
+                context.unregisterReceiver(this)
 
-        } else {
-            requestPermissionsCompat(
-                arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE),
-                PERMISSION_REQUEST_STORAGE
+                //probieren, ob das läuft - ansonsten dialoganzeigen s.o.
+                installation()
+            }
+        }
+        //ab api33
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            this.registerReceiver(br, IntentFilter(DownloadManager.ACTION_DOWNLOAD_COMPLETE),
+                RECEIVER_EXPORTED
             )
+        }else{
+            this.registerReceiver(br, IntentFilter(DownloadManager.ACTION_DOWNLOAD_COMPLETE))
         }
+
     }
 
-    override fun onRequestPermissionsResult(
-        requestCode: Int,
-        permissions: Array<out String>,
-        grantResults: IntArray
-    ) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-        if (requestCode == PERMISSION_REQUEST_STORAGE) {
-            // Request for storage permission.
-            if (grantResults.size == 1 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                // start downloading
-                downloadController.enqueueDownload()
-                d("Dieter", "onRequestPermissionsResult: enqueueDownload")
-            } else {
-                // Permission request was denied.
-                binding.updateLayout.showSnackbar(R.string.storage_permission_denied, Snackbar.LENGTH_SHORT)
-                d("Dieter", "onRequestPermissionsResult: storage_permission_denied")
-            }
+    private fun installation(){
+        val destinationString =  getExternalStoragePublicDirectory(DIRECTORY_DOWNLOADS).toString() + "/" + filename
+        val contentUri = FileProvider.getUriForFile(
+            this,
+            SessionLib.APPLICATIONID + ".provider",
+            File(destinationString)
+        )
+        val installintent = Intent(Intent.ACTION_VIEW)
+        installintent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
+        installintent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+        installintent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+        installintent.putExtra(Intent.EXTRA_NOT_UNKNOWN_SOURCE, true)
+        installintent.data = contentUri
+        try {
+            startActivity(installintent)
+        } catch (e: ActivityNotFoundException) {
+            e.printStackTrace()
+            Log.e("Dieter", "Error in opening the file! : $e")
         }
     }
-
 
 }

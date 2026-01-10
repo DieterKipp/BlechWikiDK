@@ -2,12 +2,14 @@ package com.example.blechwikidk
 
 import android.os.Bundle
 import android.util.Log.d
-import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import com.example.blechwikidk.databinding.EgliederTextBinding
 import com.example.blechwikidk.util.SessionLib
 import com.google.gson.Gson
-import kotlinx.coroutines.*
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.MainScope
+import kotlinx.coroutines.async
+import kotlinx.coroutines.launch
 import java.io.IOException
 import java.net.URL
 
@@ -42,7 +44,7 @@ class EGLiederText:AppCompatActivity() {
         // io dispatcher for background thread network operation
 
         val vIx = intent.getStringExtra("vIx")
-        val uRLString = SessionLib.RestBasisURL + "EGText?EGIx=$vIx"
+        val uRLString = SessionLib.BASISURL + "EGText?EGIx=$vIx"
 
         //d("Dieter", "fetchdatafromurl $uRLString")
         //
@@ -68,9 +70,4 @@ class EGLiederText:AppCompatActivity() {
         }
     }
 
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        onBackPressed()
-        return true
-    }
 }

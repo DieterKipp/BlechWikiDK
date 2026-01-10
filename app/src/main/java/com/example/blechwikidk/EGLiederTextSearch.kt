@@ -3,11 +3,9 @@ package com.example.blechwikidk
 import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
-import android.text.InputType
 import android.util.Log.d
 import android.view.*
 import android.widget.TextView
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -22,7 +20,6 @@ import kotlinx.coroutines.*
 import java.io.IOException
 import java.net.URL
 import java.net.URLDecoder
-import java.util.*
 
 
 class EGLiederTextSearch : AppCompatActivity() {
@@ -107,11 +104,11 @@ class EGLiederTextSearch : AppCompatActivity() {
         var uRLString = ""
         when (searchterms.size) {
             1 -> uRLString =
-                SessionLib.RestBasisURL + "EGText?EGIx=$vIx&searchterm=${searchterms[0]}"
+                SessionLib.BASISURL + "EGText?EGIx=$vIx&searchterm=${searchterms[0]}"
             2 -> uRLString =
-                SessionLib.RestBasisURL + "EGText?EGIx=$vIx&searchterm=${searchterms[0]}&searchterm2=${searchterms[1]}"
+                SessionLib.BASISURL + "EGText?EGIx=$vIx&searchterm=${searchterms[0]}&searchterm2=${searchterms[1]}"
             3 -> uRLString =
-                SessionLib.RestBasisURL + "EGText?EGIx=$vIx&searchterm=${searchterms[0]}&searchterm2=${searchterms[1]}&searchterm3=${searchterms[2]}"
+                SessionLib.BASISURL + "EGText?EGIx=$vIx&searchterm=${searchterms[0]}&searchterm2=${searchterms[1]}&searchterm3=${searchterms[2]}"
 
         }
         d("Dieter", "fetchdatafromurl $uRLString")
@@ -154,11 +151,11 @@ class EGLiederTextSearch : AppCompatActivity() {
         // asynchronously read html from url
         // io dispatcher for background thread network operation
         val uRLString: String = when (searchterms.size) {
-            1 -> SessionLib.RestBasisURL + "EGText?searchterm=${searchterms[0]}"
-            2 -> SessionLib.RestBasisURL + "EGText?searchterm=${searchterms[0]}&searchterm2=${searchterms[1]}"
-            3 -> SessionLib.RestBasisURL + "EGText?searchterm=${searchterms[0]}&searchterm2=${searchterms[1]}&searchterm3=${searchterms[2]}"
+            1 -> SessionLib.BASISURL + "EGText?searchterm=${searchterms[0]}"
+            2 -> SessionLib.BASISURL + "EGText?searchterm=${searchterms[0]}&searchterm2=${searchterms[1]}"
+            3 -> SessionLib.BASISURL + "EGText?searchterm=${searchterms[0]}&searchterm2=${searchterms[1]}&searchterm3=${searchterms[2]}"
             else -> {
-                SessionLib.RestBasisURL + "EGText?searchterm=${searchterms[0]}&searchterm2=${searchterms[1]}&searchterm3=${searchterms[2]}"
+                SessionLib.BASISURL + "EGText?searchterm=${searchterms[0]}&searchterm2=${searchterms[1]}&searchterm3=${searchterms[2]}"
             }
         }
 
@@ -229,7 +226,7 @@ class EGLiederTextSearch : AppCompatActivity() {
         override fun onCreateViewHolder(
             parent: ViewGroup,
             viewType: Int
-        ): InnerFundstellentextsearchAdapter.ViewHolder {
+        ): ViewHolder {
 
             val view = LayoutInflater.from(parent.context)
                 .inflate(R.layout.fundstellentextsearch_row, parent, false)
@@ -252,7 +249,7 @@ class EGLiederTextSearch : AppCompatActivity() {
         override fun getItemCount(): Int = searchlist.size
 
         override fun onBindViewHolder(
-            holder: InnerFundstellentextsearchAdapter.ViewHolder,
+            holder: ViewHolder,
             position: Int
         ) {
             d("Dieter","onbindviewholder $position")

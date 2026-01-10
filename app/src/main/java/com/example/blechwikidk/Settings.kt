@@ -60,8 +60,8 @@ class Settings : AppCompatActivity() {
 
 
         //-----------
-        SessionLib.sharedPref.edit() { remove("nurFundstellenMeineBücher") }
-        SessionLib.sharedPref.edit() { remove("FundstellennurMeineBücher") }
+        SessionLib.sharedPref.edit { remove("nurFundstellenMeineBücher") }
+        SessionLib.sharedPref.edit { remove("FundstellennurMeineBücher") }
         //-----------
 
         setRCAdapter()
@@ -121,7 +121,7 @@ class Settings : AppCompatActivity() {
 
             R.id.action_shareAppLink -> {
 
-                val filename = "${SessionLib.ident}/${SessionLib.ident}.apk"
+                val filename = "${SessionLib.IDENT}/${SessionLib.IDENT}.apk"
                 val apkUrl = "http://pcportal.ddns.net/downloads/apk/$filename"
 
                 val intent = Intent(Intent.ACTION_SEND)
@@ -131,10 +131,10 @@ class Settings : AppCompatActivity() {
                 intent.putExtra(Intent.EXTRA_SUBJECT, "der link zum download der App...")
                 intent.putExtra(Intent.EXTRA_TEXT, apkUrl)
 
-                intent.putExtra(Intent.EXTRA_TITLE, SessionLib.ident)
+                intent.putExtra(Intent.EXTRA_TITLE, SessionLib.IDENT)
 
                 //d("Dieter", "$vURL")
-                startActivity(Intent.createChooser(intent, "link teilen für ${SessionLib.ident}"))
+                startActivity(Intent.createChooser(intent, "link teilen für ${SessionLib.IDENT}"))
                 return true
 
             }
