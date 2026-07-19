@@ -84,7 +84,7 @@ class EGLieder : AppCompatActivity() {
             SessionLib.isinitialized = "true"
         }
         //------
-        val versiontext = "Version ${SessionLib.currentVersionName}"
+        val versiontext = "Version ${SessionLib.VERSIONNAME}"
         binding.VersionTextview.text = versiontext
 
         //------------------

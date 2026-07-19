@@ -29,6 +29,9 @@
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+            <layout
+                android:defaultHeight="720dp"
+                android:defaultWidth="1280dp" />
         </activity>
 
         <activity

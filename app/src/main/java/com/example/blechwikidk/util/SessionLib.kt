@@ -4,7 +4,6 @@ import android.content.Context
 import android.content.SharedPreferences
 import android.net.ConnectivityManager
 import android.widget.Toast
-import com.example.blechwikidk.BuildConfig
 import kotlinx.coroutines.MainScope
 import androidx.core.content.edit
 
@@ -20,7 +19,6 @@ object SessionLib {
     const val BASISURL = "http://pcportal.ddns.net/RestBlechWiki/api/"
     const val BASISURLPICBUCH = "http://pcportal.ddns.net/Bilder/BilderBuch/"
     var isOnline = ""
-    var currentVersionName = BuildConfig.VERSION_NAME
     var isinitialized = "false"
 
     lateinit var sharedPref: SharedPreferences

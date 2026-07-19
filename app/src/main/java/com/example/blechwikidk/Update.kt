@@ -66,7 +66,7 @@ class Update : AppCompatActivity() {
             downloadController.enqueueDownload()
         }
 
-        binding.ButtonInstallation.setOnClickListener(){
+        binding.ButtonInstallation.setOnClickListener {
             installation()
         }
 
