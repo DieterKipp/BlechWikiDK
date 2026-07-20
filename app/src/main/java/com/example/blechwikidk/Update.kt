@@ -36,6 +36,7 @@ class Update : AppCompatActivity() {
         binding = UpdateBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
+        SessionLib.setInsets(view)
 
         //---------------------------------------------------
 

@@ -5,6 +5,7 @@ import android.view.WindowManager
 import android.webkit.WebSettings.LOAD_NO_CACHE
 import androidx.appcompat.app.AppCompatActivity
 import com.example.blechwikidk.databinding.BuchWebviewerBinding
+import com.example.blechwikidk.util.SessionLib
 
 class WebViewer:AppCompatActivity() {
 
@@ -16,6 +17,7 @@ class WebViewer:AppCompatActivity() {
         binding = BuchWebviewerBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
+        SessionLib.setInsets(view)
 
         window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
         binding.buchDetailsWebviewer.settings.builtInZoomControls = true

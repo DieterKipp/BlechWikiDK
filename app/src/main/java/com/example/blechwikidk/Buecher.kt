@@ -36,6 +36,7 @@ class Buecher : AppCompatActivity() {
         binding = BuecherBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
+        SessionLib.setInsets(view)
 
         supportActionBar?.apply {
             setDisplayHomeAsUpEnabled(true)

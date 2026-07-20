@@ -26,6 +26,7 @@ class EGLiederText:AppCompatActivity() {
         binding = EgliederTextBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
+        SessionLib.setInsets(view)
 
         supportActionBar?.apply {
             setDisplayHomeAsUpEnabled(false)

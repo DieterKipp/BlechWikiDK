@@ -48,6 +48,7 @@ class EGLieder : AppCompatActivity() {
         binding = EgliederBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
+        SessionLib.setInsets(view)
 
         supportActionBar?.apply {
             setDisplayHomeAsUpEnabled(true)

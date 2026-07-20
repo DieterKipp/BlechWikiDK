@@ -3,9 +3,14 @@ package com.example.blechwikidk.util
 import android.content.Context
 import android.content.SharedPreferences
 import android.net.ConnectivityManager
+import android.util.Log.d
+import android.view.View
 import android.widget.Toast
 import kotlinx.coroutines.MainScope
 import androidx.core.content.edit
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
+import androidx.core.view.updatePadding
 
 object SessionLib {
 
@@ -59,5 +64,22 @@ object SessionLib {
 
     fun getPref(vkey:String):String{
         return sharedPref.getString(vkey,"noname")?:""
+    }
+
+    fun setInsets(view: View) {
+        ViewCompat.setOnApplyWindowInsetsListener(view) { v, insets ->
+            val bars = insets.getInsets(
+                WindowInsetsCompat.Type.systemBars()
+                        or WindowInsetsCompat.Type.displayCutout()
+            )
+            d("Dieter","$bars")
+            v.updatePadding(
+                left = bars.left,
+                top = bars.top,
+                right = bars.right,
+                bottom = bars.bottom,
+            )
+            WindowInsetsCompat.CONSUMED
+        }
     }
 }

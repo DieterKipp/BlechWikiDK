@@ -26,6 +26,7 @@ class EGLiederFundstellen : AppCompatActivity() {
         binding = FundstellenBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
+        SessionLib.setInsets(view)
 
         supportActionBar?.apply {
             setDisplayHomeAsUpEnabled(false)
