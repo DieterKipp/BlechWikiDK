@@ -23,7 +23,7 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/file_provider_paths" />
         </provider>
-        <activity android:name=".EGLieder"
+        <activity android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -36,19 +36,9 @@
         </activity>
 
         <activity
-            android:name=".Titel"
-            android:configChanges="orientation|screenSize|screenLayout|keyboardHidden" />
-        <activity
-            android:name=".Komponist"
-            android:configChanges="orientation|screenSize|screenLayout|keyboardHidden" />
-        <activity
-            android:name=".Buecher"
-            android:configChanges="orientation|screenSize|screenLayout|keyboardHidden" />
-        <activity
             android:name=".Settings" />
         <activity
-            android:name=".EGLiederFundstellen"
-            android:parentActivityName=".EGLieder"/>
+            android:name=".EGLiederFundstellen"/>
         <activity
             android:name=".BuecherFundstellen"
             android:configChanges="orientation|screenSize|screenLayout|keyboardHidden"/>
@@ -56,8 +46,7 @@
             android:name=".KomponistFundstellen"
             android:configChanges="orientation|screenSize|screenLayout|keyboardHidden"/>
         <activity
-            android:name=".TitelFundstellen"
-            android:parentActivityName=".Titel"/>
+            android:name=".TitelFundstellen"/>
         <activity
             android:name=".BuchDetails" />
         <activity

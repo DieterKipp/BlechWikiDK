@@ -12,7 +12,7 @@ import com.example.blechwikidk.model.EGLiedMod
 class EGLiederAdapterABC(private val egLiederList: List<EGLiedMod>, private val sort:String) : RecyclerView.Adapter<EGLiederAdapterABC.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.eglieder_row_abc, parent, false)
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.frag_eg_row_abc, parent, false)
 
         val vholder = ViewHolder(view)
 
@@ -20,9 +20,9 @@ class EGLiederAdapterABC(private val egLiederList: List<EGLiedMod>, private val 
             //
 
             val intent = Intent(parent.context, EGLiederFundstellen::class.java)
-            intent.putExtra("IxUr",egLiederList[vholder.adapterPosition].ixUr.toString())
-            intent.putExtra("Ix",egLiederList[vholder.adapterPosition].ix.toString())
-            intent.putExtra("Lied",egLiederList[vholder.adapterPosition].lied)
+            intent.putExtra("IxUr",egLiederList[vholder.bindingAdapterPosition].ixUr.toString())
+            intent.putExtra("Ix",egLiederList[vholder.bindingAdapterPosition].ix.toString())
+            intent.putExtra("Lied",egLiederList[vholder.bindingAdapterPosition].lied)
             parent.context.startActivity(intent)
         }
 
@@ -52,7 +52,7 @@ class EGLiederAdapterABC(private val egLiederList: List<EGLiedMod>, private val 
 class EGLiederAdapterNr(private val egLiederList: List<EGLiedMod>, private val sort:String) : RecyclerView.Adapter<EGLiederAdapterNr.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.eglieder_row_nr, parent, false)
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.frag_eg_row_nr, parent, false)
 
         val vholder = ViewHolder(view)
 
@@ -60,9 +60,9 @@ class EGLiederAdapterNr(private val egLiederList: List<EGLiedMod>, private val s
             //
 
             val intent = Intent(parent.context, EGLiederFundstellen::class.java)
-            intent.putExtra("IxUr",egLiederList[vholder.adapterPosition].ixUr.toString())
-            intent.putExtra("Ix",egLiederList[vholder.adapterPosition].ix.toString())
-            intent.putExtra("Lied",egLiederList[vholder.adapterPosition].lied)
+            intent.putExtra("IxUr",egLiederList[vholder.bindingAdapterPosition].ixUr.toString())
+            intent.putExtra("Ix",egLiederList[vholder.bindingAdapterPosition].ix.toString())
+            intent.putExtra("Lied",egLiederList[vholder.bindingAdapterPosition].lied)
             parent.context.startActivity(intent)
         }
 

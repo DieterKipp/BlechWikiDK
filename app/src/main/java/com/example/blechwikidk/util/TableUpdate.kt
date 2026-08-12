@@ -18,8 +18,9 @@ import java.net.URL
 
 object TableUpdate {
 
-    private val mainScope = MainScope()
-    private var dietersBuecherVomServer = "ja"
+    val mainScope = MainScope()
+    private var dietersBuecherVomServer = ""
+    // standard ist nothing in sharedprefs
 
     fun checkforTableupdateTitel() {
 
@@ -66,6 +67,21 @@ object TableUpdate {
         }
     }
 
+    fun checkforTableupdateEG() {
+
+        if (SessionLib.isOnline == "true") {
+            val resultAsync = mainScope.async(Dispatchers.IO) {
+                getRESTDataEG()
+            }
+            mainScope.launch(Dispatchers.Main) {
+                if(resultAsync.await()=="fertig"){
+                    //setUI(ctx)
+                    Log.d("Dieter", "checkforTableupdateEG ende")
+                }
+            }
+        }
+    }
+
     fun getRESTDataEG():String {
         Log.d("Dieter", "checkforTableupdatesEG beginn")
 
@@ -100,7 +116,7 @@ object TableUpdate {
         return "fertig"
     }
 
-    private fun getRESTDataTitel():String {
+    fun getRESTDataTitel():String {
         Log.d("Dieter", "checkforTableupdatesTitel beginn")
         val changecounterstring = SessionLib.getPref("TitelChangeCounter")
         val changecounter = if (changecounterstring == "noname") {
@@ -245,7 +261,9 @@ object TableUpdate {
     }
 
     private fun getRESTDataBuecher():String {
-        Log.d("Dieter", "checkforTableupdatesBuecher beginn")
+
+        dietersBuecherVomServer = SessionLib.getPref("dietersBuecherVomServer")
+        Log.d("Dieter", "checkforTableupdatesBuecher beginn-dietersbücher: $")
         val changecounterstring = SessionLib.getPref("BuchChangeCounter")
         val changecounter = if (changecounterstring == "noname") {
             0

@@ -5,7 +5,7 @@ import android.content.Context
 import android.content.Intent
 import android.util.Log.d
 import android.widget.Toast
-import com.example.blechwikidk.Update
+import androidx.room.Update
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
 import kotlinx.coroutines.launch

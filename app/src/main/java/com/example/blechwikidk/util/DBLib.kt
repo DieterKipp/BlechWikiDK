@@ -16,7 +16,7 @@ object DBLib {
                 ctx.applicationContext,
                 AppDatabase::class.java, "database-BlechWiki"
             )
-                .fallbackToDestructiveMigration()
+                .fallbackToDestructiveMigration(false)
                 //.addMigrations(MIGRATION_10_11)
                 .allowMainThreadQueries()
                 .build()
@@ -26,7 +26,7 @@ object DBLib {
                 ctx.applicationContext,
                 AppDatabase::class.java, "database-BlechWiki"
             )
-                .fallbackToDestructiveMigration()
+                .fallbackToDestructiveMigration(false)
                 //.addMigrations(MIGRATION_10_11)
                 .build()
         }

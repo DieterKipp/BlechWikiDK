@@ -11,14 +11,14 @@ import com.example.blechwikidk.database.TitelFromDB
 class TitelAdapter(private val titelList:List<TitelFromDB>) : RecyclerView.Adapter<TitelAdapter.ViewHolder>()  {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.titel_row, parent, false)
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.frag_titel_row, parent, false)
         val vholder = ViewHolder(view)
 
 
         view.setOnClickListener {
             val intent = Intent(parent.context, TitelFundstellen::class.java)
-            intent.putExtra("Ix", titelList[vholder.adapterPosition].ix.toString())
-            intent.putExtra("Titel", titelList[vholder.adapterPosition].titel)
+            intent.putExtra("Ix", titelList[vholder.bindingAdapterPosition].ix.toString())
+            intent.putExtra("Titel", titelList[vholder.bindingAdapterPosition].titel)
 
             parent.context.startActivity(intent)
         }

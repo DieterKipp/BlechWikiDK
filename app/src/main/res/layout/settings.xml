@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.drawerlayout.widget.DrawerLayout
+<androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -7,11 +7,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context=".EGLieder">
+    tools:context=".Settings">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+
 
         <Spinner
             android:id="@+id/SettingsLKASpinner"
@@ -40,6 +38,37 @@
             app:layout_constraintStart_toStartOf="@+id/SettingsLKASpinner"
             app:layout_constraintTop_toBottomOf="@+id/SettingsLKASpinner" />
 
+        <androidx.appcompat.widget.SwitchCompat
+            android:id="@+id/settingsSwitchDietersBuecher"
+            android:layout_width="173dp"
+            android:layout_height="66dp"
+            android:layout_marginTop="16dp"
+            android:text="Dieters Bücher als meine benutzen"
+            app:layout_constraintStart_toStartOf="@+id/settingsSwitchMeineBuecher"
+            app:layout_constraintTop_toBottomOf="@+id/settingsSwitchMeineBuecher" />
+
+        <TextView
+            android:id="@+id/update_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="update app"
+            android:background="@drawable/button_back_rounded"
+            android:padding="8dp"
+            app:layout_constraintStart_toStartOf="@+id/settingsSwitchDietersBuecher"
+            app:layout_constraintTop_toBottomOf="@+id/settingsSwitchDietersBuecher" />
+
+        <TextView
+            android:id="@+id/sharelink_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="share app link"
+            android:background="@drawable/button_back_rounded"
+            android:padding="8dp"
+            app:layout_constraintStart_toStartOf="@+id/update_btn"
+            app:layout_constraintTop_toBottomOf="@+id/update_btn" />
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/settingsSharedPrefs"
             android:layout_width="0dp"
@@ -48,17 +77,8 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/settingsSwitchMeineBuecher" />
+            app:layout_constraintTop_toBottomOf="@+id/sharelink_btn" />
 
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <com.google.android.material.navigation.NavigationView
-        android:id="@+id/settingsNavView"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:layout_gravity="start"
-        android:fitsSystemWindows="true"
-        app:menu="@menu/menu_main"/>
-
-</androidx.drawerlayout.widget.DrawerLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

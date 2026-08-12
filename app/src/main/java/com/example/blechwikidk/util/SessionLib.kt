@@ -2,6 +2,7 @@ package com.example.blechwikidk.util
 
 import android.content.Context
 import android.content.SharedPreferences
+import android.content.res.Configuration
 import android.net.ConnectivityManager
 import android.util.Log.d
 import android.view.View
@@ -17,12 +18,12 @@ object SessionLib {
     const val IDENT = "BlechWikiDK"
     //diese drei Werte mit build.gradle synchron halten
     const val APPLICATIONID = "com.example.blechwikidk"
-    const val VERSIONCODE = 37
-    const val VERSIONNAME = "10.01.26"
+    const val VERSIONCODE = 39
+    const val VERSIONNAME = "12.10.26"
 
 
-    const val BASISURL = "http://pcportal.ddns.net/RestBlechWiki/api/"
-    const val BASISURLPICBUCH = "http://pcportal.ddns.net/Bilder/BilderBuch/"
+    const val BASISURL = "https://teddymuetze.ddns.net/RestBlechWiki/api/"
+    const val BASISURLPICBUCH = "https://teddymuetze.ddns.net/Bilder/BilderBuch/"
     var isOnline = ""
     var isinitialized = "false"
 
@@ -39,6 +40,19 @@ object SessionLib {
         } else {
             "true"
         }
+    }
+
+    fun orientation(ctx:Context):String{
+        val orientation =  ctx.resources.configuration.orientation
+        return if (orientation == Configuration.ORIENTATION_LANDSCAPE) {
+            "landscape"
+        } else {
+            "portrait"
+        }
+    }
+
+    fun isTablet(ctx: Context): Boolean {
+        return ctx.resources.configuration.smallestScreenWidthDp >= 600
     }
 
     fun dialoganzeigen(ctx:Context,msg:String,btntext:String,titel:String){

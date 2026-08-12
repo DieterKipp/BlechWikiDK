@@ -18,29 +18,29 @@ class BuecherAdapter(private val buecherList: List<BuchRCMod>) :
     RecyclerView.Adapter<BuecherAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.buecher_row, parent, false)
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.frag_buecher_row, parent, false)
         val vholder = ViewHolder(view)
 
 
 
         view.setOnClickListener {
             val intent = Intent(parent.context, BuecherFundstellen::class.java)
-            intent.putExtra("BuchId", buecherList[vholder.adapterPosition].buchId.toString())
-            intent.putExtra("Buch", buecherList[vholder.adapterPosition].buch)
+            intent.putExtra("BuchId", buecherList[vholder.bindingAdapterPosition].buchId.toString())
+            intent.putExtra("Buch", buecherList[vholder.bindingAdapterPosition].buch)
 
             parent.context.startActivity(intent)
         }
 
         view.setOnLongClickListener {
             val intent = Intent(parent.context, BuchDetails::class.java)
-            intent.putExtra("BuchId", buecherList[vholder.adapterPosition].buchId.toString())
+            intent.putExtra("BuchId", buecherList[vholder.bindingAdapterPosition].buchId.toString())
 
             parent.context.startActivity(intent)
             true
         }
 
         vholder.vmeineBuecher.setOnClickListener {
-            val vorhandenDB = buecherList[vholder.adapterPosition].vorhanden
+            val vorhandenDB = buecherList[vholder.bindingAdapterPosition].vorhanden
             val vcheckbox: CheckBox = it.findViewById(R.id.LiteraBuecherBuchCheckBox)
             //val checkstate = vcheckbox.isChecked
             val checkstate = if (vcheckbox.isChecked) {
@@ -51,9 +51,9 @@ class BuecherAdapter(private val buecherList: List<BuchRCMod>) :
 //            d("Dieter", "vorhandenDB: $vorhandenDB")
 //            d("Dieter", "checkboxstate: $checkstate")
             if (vorhandenDB !== checkstate) {
-                buecherList[vholder.adapterPosition].vorhanden = checkstate
+                buecherList[vholder.bindingAdapterPosition].vorhanden = checkstate
                 DBLib.DatabaseInstance.buecherDAO()
-                    .updatebuchvorhanden(buecherList[vholder.adapterPosition].buchId, checkstate)
+                    .updatebuchvorhanden(buecherList[vholder.bindingAdapterPosition].buchId, checkstate)
                 d("Dieter", "checkboxstategeändert: $checkstate")
             }
         }

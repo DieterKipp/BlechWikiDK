@@ -13,7 +13,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.blechwikidk.databinding.FundstellentextsearchBinding
 import com.example.blechwikidk.model.EGTextsearchMod
 import com.example.blechwikidk.util.Fundstellen
-import com.example.blechwikidk.util.MenuLib
 import com.example.blechwikidk.util.SessionLib
 import com.google.gson.Gson
 import kotlinx.coroutines.*
@@ -67,15 +66,6 @@ class EGLiederTextSearch : AppCompatActivity() {
             val intent = Intent(this, EGLiederText::class.java)
             intent.putExtra("vIx", vIx.toString())
             startActivity(intent)
-        }
-
-        binding.fundstellentextsearchNavView.setNavigationItemSelectedListener {
-            binding.EGDrawerLayout.closeDrawers()
-
-            val intent = MenuLib.mainmenueIntent( it, this)
-            startActivity(intent)
-
-            true
         }
 }
 
@@ -210,12 +200,6 @@ class EGLiederTextSearch : AppCompatActivity() {
 //        return super.onCreateOptionsMenu(menu)
 //    }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-
-        binding.EGDrawerLayout.openDrawer(GravityCompat.START)
-        binding.fundstellentextsearchNavView.setCheckedItem(R.id.actionEGTextsearch)
-        return true
-    }
 
     //----------------------------------------------------------------------------
     //----------------------------------------------------------------------------
@@ -235,8 +219,8 @@ class EGLiederTextSearch : AppCompatActivity() {
             val vholder = ViewHolder(view)
 
             view.setOnClickListener {
-                vIx = searchlist[vholder.adapterPosition].ix
-                vadapterposition = vholder.adapterPosition
+                vIx = searchlist[vholder.bindingAdapterPosition].ix
+                vadapterposition = vholder.bindingAdapterPosition
                 fetchtextpattern(vIx)
                 notifyDataSetChanged()
 

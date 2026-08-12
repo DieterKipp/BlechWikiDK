@@ -9,10 +9,22 @@
         android:title="EGtoggle"
         app:showAsAction="ifRoom" />
     <item
+        android:id="@+id/actionEGTextsearch"
+        android:icon="@drawable/ic_text_tt"
+        android:orderInCategory="150"
+        android:title="EG Textsuche"
+        app:showAsAction="ifRoom" />
+    <item
         android:id="@+id/actionEGtableupdate"
         android:icon="@drawable/ic_update_green"
         android:orderInCategory="100"
         android:title="update Tabelle vom Server"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/actionEGTextsearchdouble"
+        android:icon="@drawable/ic_text_tt"
+        android:orderInCategory="200"
+        android:title="EG Textsuche"
         app:showAsAction="never" />
 
 </menu>

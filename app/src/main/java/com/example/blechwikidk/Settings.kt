@@ -4,8 +4,6 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log.d
 import android.view.LayoutInflater
-import android.view.Menu
-import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
@@ -13,15 +11,14 @@ import android.widget.ArrayAdapter
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.GravityCompat
+import androidx.core.content.edit
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.blechwikidk.databinding.SettingsBinding
 import com.example.blechwikidk.model.EGLKAMod
 import com.example.blechwikidk.util.Fundstellen
-import com.example.blechwikidk.util.MenuLib
 import com.example.blechwikidk.util.SessionLib
-import androidx.core.content.edit
+import com.example.blechwikidk.util.TableUpdate
 
 class Settings : AppCompatActivity() {
 
@@ -36,9 +33,10 @@ class Settings : AppCompatActivity() {
         binding = SettingsBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
+        SessionLib.setInsets(view)
 
         supportActionBar?.apply {
-            setDisplayHomeAsUpEnabled(true)
+            setDisplayHomeAsUpEnabled(false)
             setHomeAsUpIndicator(R.drawable.ic_menu_blue)
             val localclassname = localClassName
             title = localclassname
@@ -52,6 +50,9 @@ class Settings : AppCompatActivity() {
         if (Fundstellen.fundstellenFilter == "meine") {
             binding.settingsSwitchMeineBuecher.isChecked = true
         }
+        if (SessionLib.getPref("dietersBuecherVomServer") == "ja") {
+            binding.settingsSwitchDietersBuecher.isChecked = true
+        }
 
         oncreateflag = "false"
 
@@ -60,6 +61,7 @@ class Settings : AppCompatActivity() {
 
 
         //-----------
+        //Altlasten
         SessionLib.sharedPref.edit { remove("nurFundstellenMeineBücher") }
         SessionLib.sharedPref.edit { remove("FundstellennurMeineBücher") }
         //-----------
@@ -76,19 +78,32 @@ class Settings : AppCompatActivity() {
     }
 
     private fun setListeners() {
-        
-        binding.settingsNavView.setNavigationItemSelectedListener {
-            binding.SettingsDrawerLayout.closeDrawers()
 
-            val intent = MenuLib.mainmenueIntent(it, this)
+        binding.updateBtn.setOnClickListener {
+            intent = Intent(this, Update::class.java)
+            intent.putExtra("versionCodefromServer",99)
+            intent.putExtra("versionNamefromServer","kein")
             startActivity(intent)
-
-            true
-
         }
 
+        binding.sharelinkBtn.setOnClickListener {
+            val filename = "${SessionLib.IDENT}/${SessionLib.IDENT}.apk"
+            val apkUrl = "http://pcportal.ddns.net/downloads/apk/$filename"
 
-        // Set an checked change listener for switch button
+            val intent = Intent(Intent.ACTION_SEND)
+            //intent.setPackage("com.whatsapp")
+            intent.type = "text/plain"
+            //------------
+            intent.putExtra(Intent.EXTRA_SUBJECT, "der link zum download der App...")
+            intent.putExtra(Intent.EXTRA_TEXT, apkUrl)
+
+            intent.putExtra(Intent.EXTRA_TITLE, SessionLib.IDENT)
+
+            //d("Dieter", "$vURL")
+            startActivity(Intent.createChooser(intent, "link teilen für ${SessionLib.IDENT}"))
+        }
+
+        // Set a checked change listener for switch button
         binding.settingsSwitchMeineBuecher.setOnCheckedChangeListener { _, isChecked ->
             if (oncreateflag == "false") {
                 if (isChecked) {
@@ -109,54 +124,25 @@ class Settings : AppCompatActivity() {
             Fundstellen.fundstellenFilter = SessionLib.getPref("FundstellenFilter")
             setRCAdapter()
         }
-    }
+        binding.settingsSwitchDietersBuecher.setOnCheckedChangeListener { _, isChecked ->
 
-    override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        menuInflater.inflate(R.menu.option_menu_settings, menu)
-        return super.onCreateOptionsMenu(menu)
-    }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when (item.itemId) {
+            if (oncreateflag == "false") {
+                if (isChecked) {
+                    // The switch is enabled/checked
+                    SessionLib.setPref("dietersBuecherVomServer", "ja")
 
-            R.id.action_shareAppLink -> {
-
-                val filename = "${SessionLib.IDENT}/${SessionLib.IDENT}.apk"
-                val apkUrl = "http://pcportal.ddns.net/downloads/apk/$filename"
-
-                val intent = Intent(Intent.ACTION_SEND)
-                //intent.setPackage("com.whatsapp")
-                intent.type = "text/plain"
-                //------------
-                intent.putExtra(Intent.EXTRA_SUBJECT, "der link zum download der App...")
-                intent.putExtra(Intent.EXTRA_TEXT, apkUrl)
-
-                intent.putExtra(Intent.EXTRA_TITLE, SessionLib.IDENT)
-
-                //d("Dieter", "$vURL")
-                startActivity(Intent.createChooser(intent, "link teilen für ${SessionLib.IDENT}"))
-                return true
-
+                } else {
+                    // The switch is disabled
+                    SessionLib.setPref("dietersBuecherVomServer", "nein")
+                }
+            SessionLib.setPref("BuchChangeCounter","0")
+            TableUpdate.checkforTableupdateBuecher()
             }
-
-            R.id.action_update -> {
-                intent = Intent(this, Update::class.java)
-                startActivity(intent)
-                return true
-            }
-
-            else -> {
-                binding.SettingsDrawerLayout.openDrawer(GravityCompat.START)
-                binding.settingsNavView.setCheckedItem(R.id.actionSettings)
-                return true
-            }
-
 
         }
-
-
-        //return super.onOptionsItemSelected(item)
     }
+
 
     private fun spinnerinitialisieren() {
         val vLKAgelesen = SessionLib.getPref("EGLKA")
@@ -180,9 +166,9 @@ class Settings : AppCompatActivity() {
 
         val vLKAList = mutableListOf<String>()
         var vPosition = 0
-        for (i in 0 until arraylist.size) {
-            vLKAList.add(arraylist[i].lkalang)
-            if (arraylist[i].lka == vLKAgelesen) {
+        for ((i, element) in arraylist.withIndex()) {
+            vLKAList.add(element.lkalang)
+            if (element.lka == vLKAgelesen) {
                 vPosition = i
             }
         }

@@ -5,6 +5,7 @@ import android.os.Looper
 import android.text.Editable
 import android.text.TextWatcher
 import android.widget.EditText
+import android.widget.Toast
 
 abstract class AbstrHelper {
 

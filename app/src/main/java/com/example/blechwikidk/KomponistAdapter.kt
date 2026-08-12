@@ -11,14 +11,14 @@ import com.example.blechwikidk.database.KomponistFromDB
 class KomponistAdapter(private val komponistList:List<KomponistFromDB>) : RecyclerView.Adapter<KomponistAdapter.ViewHolder>()  {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.komponist_row, parent, false)
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.frag_komponisten_row, parent, false)
         val vholder = ViewHolder(view)
 
 
         view.setOnClickListener {
             val intent = Intent(parent.context, KomponistFundstellen::class.java)
-            intent.putExtra("id", komponistList[vholder.adapterPosition].id.toString())
-            intent.putExtra("Komponist", komponistList[vholder.adapterPosition].komponist)
+            intent.putExtra("id", komponistList[vholder.bindingAdapterPosition].id.toString())
+            intent.putExtra("Komponist", komponistList[vholder.bindingAdapterPosition].komponist)
 
             parent.context.startActivity(intent)
         }
