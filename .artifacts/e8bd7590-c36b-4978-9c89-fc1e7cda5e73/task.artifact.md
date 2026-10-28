@@ -1,0 +1,2 @@
+- [x] Override `onMenuOpened` in `MainActivity.kt`
+- [x] Verify build
